@@ -19,7 +19,8 @@
     "node-sass": "^4.0.0",
     "ora": "^1.1.0",
     "vue": "^2.1.10",
-    "vuex": "^2.1.2"
+    "vuex": "^2.1.2",
+    "shelljs": "^0.7.8"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
