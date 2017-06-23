@@ -18,6 +18,7 @@
     "fs": "0.0.1-security",
     "node-sass": "^4.0.0",
     "ora": "^1.1.0",
+    "rk-kit": "git+https://github.com/eunsun-choi/vue-common-components.git",
     "vue": "^2.1.10",
     "vuex": "^2.1.2",
     "shelljs": "^0.7.8"
