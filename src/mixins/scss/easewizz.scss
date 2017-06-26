@@ -25,3 +25,73 @@ $quint-out-cubic-bezier: cubic-bezier(0.23, 1, 0.32, 1);
 $sine-inout-cubic-bezier: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 $sine-in-cubic-bezier: cubic-bezier(0.47, 0, 0.745, 0.715);
 $sine-out-cubic-bezier: cubic-bezier(0.39, 0.575, 0.565, 1);
+
+
+@function _bounceOut($t, $b, $c, $d) {
+  $result: $b;
+  $t: $t/$d;
+	@if ($t < (1/2.75)) {
+    $result: $c*(7.5625*$t*$t) + $b;
+	} @else {
+    @if ($t < (2/2.75)) {
+      $t: $t - (1.5/2.75);
+      $result: $c*(7.5625*($t)*$t + .75) + $b;
+    } @else {
+      @if ($t < (2.5/2.75)) {
+        $t: $t - (2.25/2.75);
+        $result: $c*(7.5625*($t)*$t + .9375) + $b; 
+      } @else {
+        $t: $t - (2.625/2.75);
+        $result: $c*(7.5625*($t)*$t + .984375) + $b;
+      }
+    }
+  }
+
+  @return $result;
+}
+@function _bounceIn($t, $b, $c, $d) {
+  @return $c - _bounceOut($d - $t, 0, $c, $d) + $b;
+}
+
+@mixin bounceOut($att, $start, $diff) {
+  @keyframes #{$att}-bounceOut {
+    @for $i from 0 through 100 {
+      #{$i}%{
+        #{$att}: _bounceOut($i, $start, $diff, 100);
+      }
+    }
+    @content;
+  }
+  #{$att}: $start + $diff;
+  animation-name: #{$att}-bounceOut;
+}
+
+@mixin bounceIn($att, $start, $diff) {
+  @keyframes #{$att}-bounceIn {
+    @for $i from 0 through 100 {
+      #{$i}%{
+        #{$att}: _bounceIn($i, $start, $diff, 100);
+      }
+    }
+    @content;
+  }
+  #{$att}: $start + $diff;
+  animation-name: #{$att}-bounceIn;
+}
+
+@mixin bounceInOut($att, $start, $diff) {
+  @keyframes #{$att}-bounceInOut {
+    @for $i from 0 through 100 {
+      #{$i}%{
+        @if ($i < 50) {
+          #{$att}: _bounceIn($i * 2, 0, $diff, 100) * .5 + $start;
+        } @else {
+          #{$att}: _bounceOut($i * 2 - 100, 0, $diff, 100) * .5 + $diff * .5 + $start;
+        }
+      }
+    }
+    @content;
+  }
+  #{$att}: $start + $diff;
+  animation-name: #{$att}-bounceInOut;
+}
