@@ -47,7 +47,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         include: projectRoot,
-        exclude: /node_modules\/(?!lumi-kit)/
+        exclude: /node_modules\/(?!rk-kit)/
       },
       {
         test: /\.json$/,
