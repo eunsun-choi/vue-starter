@@ -1,6 +1,7 @@
 <template>
-    <div id="app">
-       This is Boilerplate
+    <div id="app" v-align="'center center'">
+      This is Boilerplate
+      <div class="bounceInOut"></div>
     </div>
 </template>
 <script>
@@ -24,8 +25,20 @@ export default {
 };
 </script>
 <style lang="scss">
-@import './mixins/scss/global';
+@import '~rk-kit/style/global';
 </style>
 <style scoped lang="scss">
-@import './mixins/scss/main';
+@import '~rk-kit/style/size';
+@import '~rk-kit/style/easewizz';
+
+canvas{
+  margin-top: 100px;
+}
+.bounceInOut {
+  position: relative;
+  height: 100px;
+  @include bounceInOut('width', 0px, 100px);
+  background:grey;
+  animation-duration: 1.1s;
+}
 </style>
